@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Application user profile",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "preferredLanguage": { "type": "string", "enum": ["en", "ur", "sd", "pa"] },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Scan": {
+      "title": "Scan",
+      "description": "A plant disease scan result",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "diseaseName": { "type": "string" },
+        "confidence": { "type": "number" },
+        "plantType": { "type": "string" },
+        "treatment": { "type": "string" },
+        "prevention": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "imageUrl", "diseaseName", "timestamp"]
+    },
+    "Disease": {
+      "title": "Disease",
+      "description": "Known plant disease information",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "plantType": { "type": "string" },
+        "description": { "type": "string" },
+        "treatment": { "type": "string" },
+        "prevention": { "type": "string" },
+        "severity": { "type": "string", "enum": ["low", "medium", "high"] }
+      },
+      "required": ["name", "plantType", "treatment"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/scans/{scanId}": {
+      "schema": "Scan",
+      "description": "History of plant scans"
+    },
+    "/diseases/{diseaseId}": {
+      "schema": "Disease",
+      "description": "Database of known diseases managed by admin"
+    }
+  }
+}

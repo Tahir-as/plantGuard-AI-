@@ -1,0 +1,5 @@
+{
+  "name": "PlantGuard AI",
+  "description": "AI-powered plant disease detection and treatment guide with multilingual support for farmers and gardeners.",
+  "requestFramePermissions": ["camera"]
+}
